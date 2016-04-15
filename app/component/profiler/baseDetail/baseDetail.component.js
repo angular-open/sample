@@ -1,0 +1,1 @@
+//# sourceMappingURL=baseDetail.component.js.map
