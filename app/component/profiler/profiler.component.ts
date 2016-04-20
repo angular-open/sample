@@ -34,7 +34,7 @@ export class ProfilerComponent implements OnInit {
             self.editStatus = self._routeParams.get('edit') == "edit" ? true : false;
         }
         
-        self.profileService.getProfile().subscribe(
+        self.profileService.getProfile(self.userUrl).subscribe(
                        data => self.successOn(data),
                        error =>  console.log(error));
         

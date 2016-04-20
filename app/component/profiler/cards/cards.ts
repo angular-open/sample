@@ -64,11 +64,12 @@ export class CardComponent implements OnInit {
     }
 
     public DeleteCard(event, index, model) {
+        var self = this;
         model.removeAnim = true;
-        var array = this.cardArray;
-        this.delayAsyn.Delay(300, function (i) {
+        var array = self.cardArray;
+        self.delayAsyn.Delay(300, function (i) {
             array.splice(index, 1);
-            this.cardArray = array;
+            self.cardArray = array;
         }, index);
     }
 }

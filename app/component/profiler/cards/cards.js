@@ -63,11 +63,12 @@ System.register(['angular2/core', 'angular2/router', '../../../service/delayServ
                     model.editInfo = editStatus;
                 };
                 CardComponent.prototype.DeleteCard = function (event, index, model) {
+                    var self = this;
                     model.removeAnim = true;
-                    var array = this.cardArray;
-                    this.delayAsyn.Delay(300, function (i) {
+                    var array = self.cardArray;
+                    self.delayAsyn.Delay(300, function (i) {
                         array.splice(index, 1);
-                        this.cardArray = array;
+                        self.cardArray = array;
                     }, index);
                 };
                 __decorate([

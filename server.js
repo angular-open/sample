@@ -15,20 +15,32 @@ app.use(cors({
 }));
 
 app.use(bodyParser.json());
+//app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/', function (req, res) {
     res.send("hello");
 });
 
-app.get('/api/getProfile', function (req, res) {
-    database.profileDB.findOne({})
+app.post('/api/getProfile', function (req, res) {
+    var objData = req.body;
+    database.profileDB.findOne({ searchUrl: objData.profileUrl })
         .populate('basicInfo')
         .populate('education')
         .populate('exprience')
         .populate('skill')
         .populate('knowledge')
-        .exec(function (error, posts) {
-            res.send(JSON.stringify(posts, null, "\t"));
+        .exec(function (error, profile) {
+            var result = JSON.stringify(profile, null, "\t")
+            if (result != "null") {
+                res.send(result);
+            } else {
+                var err = {
+                    message: "url not exit please create",
+                    status: "1020"
+                };
+                res.status(403).send(err);
+            }
+
         })
 
 });
@@ -38,6 +50,10 @@ app.get('/api/addProfile', function (req, res) {
 });
 
 app.get('/api/editProfile', function (req, res) {
+    res.send(priofileData);
+});
+
+app.get('/api/checkProfile', function (req, res) {
     res.send(priofileData);
 });
 
@@ -58,19 +74,19 @@ var data = {
     "about": "These samples of resumes and cover letters are intended purely as a guide to what is possible. Do not simply try to copy them for your own resume, because your resume should be unique (like you!).",
     "knowledge": [
         {
-            "title": "INSTALL AND CONFIGURE",
+            "title": "Knowledge you gainde",
         },
         {
-            "title": "WEB USABILITY",
+            "title": "Knowledge you gainde",
         },
     ],
     "skill": [
         {
-            "title": "WORDPRESS",
+            "title": "Technologies",
             "percentage": 80
         },
         {
-            "title": "HTML&CSS",
+            "title": "Specialities",
             "percentage": 60
         }
     ],
@@ -78,16 +94,7 @@ var data = {
         {
             "from": 2015,
             "to": 2016,
-            "title": "Seniors web&ux Designer",
-            "subTitle": "Company name",
-            "editInfo": false,
-            "addAnim": false,
-            "removeAnim": false
-        },
-        {
-            "from": 2016,
-            "to": 2017,
-            "title": "Senior web&ux Designer",
+            "title": "Example Data (Profession)",
             "subTitle": "Company name",
             "editInfo": false,
             "addAnim": false,
@@ -98,17 +105,8 @@ var data = {
         {
             "from": 2015,
             "to": 2016,
-            "title": "RGCET",
-            "subTitle": "MCA",
-            "editInfo": false,
-            "addAnim": false,
-            "removeAnim": false
-        },
-        {
-            "from": 2016,
-            "to": 2017,
-            "title": "St. joseph",
-            "subTitle": "Bsc",
+            "title": "Institue Name",
+            "subTitle": "Course or Class",
             "editInfo": false,
             "addAnim": false,
             "removeAnim": false

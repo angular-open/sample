@@ -43,7 +43,7 @@ System.register(['angular2/core', 'angular2/router', './cards/cards', '../../ser
                     if (self._routeParams.get('edit')) {
                         self.editStatus = self._routeParams.get('edit') == "edit" ? true : false;
                     }
-                    self.profileService.getProfile().subscribe(function (data) { return self.successOn(data); }, function (error) { return console.log(error); });
+                    self.profileService.getProfile(self.userUrl).subscribe(function (data) { return self.successOn(data); }, function (error) { return console.log(error); });
                     self.workExperienceTitle = "Work Experience";
                     self.educationTitle = "Education Value";
                 };
