@@ -1,0 +1,69 @@
+.card-continer {
+    position: relative;
+    background-color:#fff; 
+    box-shadow: 1px 1px 1px 1px #ccc; 
+    overflow: hidden; 
+    height: 80px; 
+    color:#444; 
+    margin-bottom:10px;
+}
+
+.card-continer .card-inner-first-row {
+    position: absolute;
+    height:100%;
+    width:100%;
+    opacity:1;
+    margin-left: 0;
+    margin-right: 0;
+    -webkit-transition: all 1s ease ;
+    -moz-transition: all 1s ease ;
+    transition: all 1s ease ;
+}
+
+.card-continer .card-inner-second-row {
+    position: absolute;
+    bottom: -100%;
+    height : 100%;
+    width : 100%;
+    background: blue;
+    opacity:0;
+    margin-left: 0;
+    margin-right: 0;
+    -webkit-transition: all 1s ease ;
+    -moz-transition: all 1s ease ;
+    transition: all 1s ease ;
+}
+
+.card-continer .second-box-open {
+    bottom: 0;
+    width:100%;
+    height:100%;
+    opacity:1;
+    -webkit-transition: all 1s ease ;
+    -moz-transition: all 1s ease ;
+    transition: all 1s ease ;
+}
+
+.card-continer .first-box-close {
+    opacity:0;
+     -webkit-transition: all 1s ease ;
+    -moz-transition: all 1s ease ;
+    transition: all 1s ease ;
+}
+
+.col-1 {
+    background-color:#6098CB; 
+    height:80px; 
+    position:relative;
+}
+
+.col-1 .col-content {
+    position:absolute; 
+    font-weight:600; 
+    text-align:center; 
+    color:#fff; 
+    font-size:14px; 
+    top: 50%; 
+    left: 50%; 
+    -webkit-transform: translate(-50%, -50%);
+}
