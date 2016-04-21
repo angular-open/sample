@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="row" style="background-color:#E1E1E1; padding-bottom:15px; padding-right:40px;">
-            <div class="col-lg-4">
+            <div class="col-lg-3" style="padding-left:20px;">
                 <div class="row" style="padding-left:30px;">
                     <h3 style="color:#6098CB; text-transform: uppercase; font-size:16px; font-weight:bold; letter-spacing:1;">Objective</h3>
                     <div style="color:#444; font-size:11px;">
@@ -56,44 +56,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-8">
-                <card-with-title [cardEdit]="editStatus"></card-with-title>
-                <div class="row" style="padding-left:20px;">
-                    <h3 style="color:#6098CB; text-transform: uppercase; font-size:16px; font-weight:bold; letter-spacing:1;">Education Value</h3>
-                    <div style="background-color:#fff; box-shadow: 1px 1px 1px 1px #ccc; min-height:50px; overflow: hidden; max-height: 80px; color:#444; margin-bottom:10px;">
-                        <div class="col-lg-4" style="background-color:#6098CB; height:80px; position:relative;">
-                            <div style="position:absolute; font-weight:600; text-align:center; color:#fff; font-size:14px; top: 50%; left: 50%; -webkit-transform: translate(-50%, -50%);">2015 - 2016</div>
-                        </div>
-                        <div class="col-lg-8" style="height:80px; position:relative;">
-                            <div style="width: 100%; padding: 15px;">
-                                <div style="text-transform: uppercase; font-size:14px; ">Senior web&ux Designer</div>
-                                <div style="text-transform: uppercase; font-size:10px; ">University name</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div style="background-color:#fff; box-shadow: 1px 1px 1px 1px #ccc; min-height:50px; overflow: hidden; max-height: 80px; color:#444; margin-bottom:10px;">
-                        <div class="col-lg-4" style="background-color:#6098CB; height:80px; position:relative;">
-                            <div style="position:absolute; font-weight:600; text-align:center; color:#fff; font-size:14px; top: 50%; left: 50%; -webkit-transform: translate(-50%, -50%);">2015 - 2016</div>
-                        </div>
-                        <div class="col-lg-8" style="height:80px; position:relative;">
-                            <div style="width: 100%; padding: 15px;">
-                                <div style="text-transform: uppercase; font-size:14px; ">Senior web&ux Designer</div>
-                                <div style="text-transform: uppercase; font-size:10px; ">University name</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div style="background-color:#fff; box-shadow: 1px 1px 1px 1px #ccc; min-height:50px; overflow: hidden; max-height: 80px; color:#444; margin-bottom:10px;">
-                        <div class="col-lg-4" style="background-color:#6098CB; height:80px; position:relative;">
-                            <div style="position:absolute; font-weight:600; text-align:center; color:#fff; font-size:14px; top: 50%; left: 50%; -webkit-transform: translate(-50%, -50%);">2015 - 2016</div>
-                        </div>
-                        <div class="col-lg-8" style="height:80px; position:relative;">
-                            <div style="width: 100%; padding: 15px;">
-                                <div style="text-transform: uppercase; font-size:14px; ">Senior web&ux Designer</div>
-                                <div style="text-transform: uppercase; font-size:10px; ">University name</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="col-lg-9">
+                <card-with-title [cardEdit]="editStatus" [cardArray]="expList" [cardTitle]="workExperienceTitle"></card-with-title>
+                <card-with-title [cardEdit]="editStatus" [(cardArray)]="eduList" [cardTitle]="educationTitle"></card-with-title>
             </div>
         </div>
     </div>

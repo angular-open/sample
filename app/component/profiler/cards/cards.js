@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', '../../../service/delayService'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1;
+    var core_1, router_1, delayService_1;
     var CardComponent;
     return {
         setters:[
@@ -19,95 +19,78 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
             },
             function (router_1_1) {
                 router_1 = router_1_1;
+            },
+            function (delayService_1_1) {
+                delayService_1 = delayService_1_1;
             }],
         execute: function() {
             CardComponent = (function () {
-                function CardComponent(_routeParams) {
+                function CardComponent(_routeParams, delayAsyn) {
                     this._routeParams = _routeParams;
+                    this.delayAsyn = delayAsyn;
                     this.cardEditUi = false;
                     this.editStatus = false;
-                    this.cardInfo = {};
-                    this.card = {};
                     this.year = [];
-                    var today = new Date();
-                    for (var i = 1930; i <= today.getFullYear() + 1; i++) {
-                        this.year.push(i);
-                    }
-                    this.cardInfo = {
-                        from: 0,
-                        to: 0,
-                        headingOne: "",
-                        headingTwo: ""
-                    };
-                    this.title = "5 Years of Experience";
-                    this.arrayData = [
-                        {
-                            year: {
-                                from: 2015,
-                                to: 2016
-                            },
-                            title: "Senior web&ux Designer",
-                            subTitle: "Company name"
-                        },
-                        {
-                            year: {
-                                from: 2016,
-                                to: 2017
-                            },
-                            title: "Senior web&ux Designer",
-                            subTitle: "Company name"
-                        },
-                    ];
+                    this.editOpen = false;
+                    this.today = new Date();
                 }
                 CardComponent.prototype.ngOnInit = function () {
                     var id = this._routeParams.get('profileurl');
                     console.log(id);
+                    for (var i = 1930; i <= this.today.getFullYear() + 1; i++) {
+                        this.year.push(i);
+                    }
                 };
-                CardComponent.prototype.OpenEdit = function () {
-                    this.editStatus = this.editStatus ? false : true;
-                    this.cardEditUi = this.cardEditUi ? false : true;
-                };
-                CardComponent.prototype.onSubmit = function (cardInfo) {
-                    console.log(cardInfo);
-                    var datas = {
-                        year: {
-                            from: cardInfo.from,
-                            to: cardInfo.to
-                        },
-                        title: cardInfo.headingOne,
-                        subTitle: cardInfo.headingTwo
-                    };
-                    this.arrayData.unshift(datas);
-                    this.cardInfo = {
+                CardComponent.prototype.AddCard = function () {
+                    if (this.cardArray.length > 0) {
+                        this.cardArray[0].addAnim = false;
+                    }
+                    this.cardArray.forEach(function (element) {
+                        element.removeAnim = false;
+                    });
+                    var card = {
                         from: 0,
                         to: 0,
-                        headingOne: "",
-                        headingTwo: ""
+                        title: "",
+                        subTitle: "",
+                        editInfo: true,
+                        addAnim: true,
+                        removeAnim: false
                     };
+                    this.cardArray.unshift(card);
                 };
-                CardComponent.prototype.onKey = function (event) {
-                    return event;
+                CardComponent.prototype.OpenEdit = function (event, model, editStatus) {
+                    model.editInfo = editStatus;
                 };
-                CardComponent.prototype.selectionChange = function (e) {
-                    console.log(e);
-                    this.cardInfo = {
-                        from: e.year.from,
-                        to: e.year.to,
-                        headingOne: e.title,
-                        headingTwo: e.subTitle
-                    };
+                CardComponent.prototype.DeleteCard = function (event, index, model) {
+                    model.removeAnim = true;
+                    var array = this.cardArray;
+                    this.delayAsyn.Delay(300, function (i) {
+                        array.splice(index, 1);
+                        this.cardArray = array;
+                    }, index);
                 };
                 __decorate([
                     core_1.Input('cardEdit'), 
                     __metadata('design:type', Boolean)
                 ], CardComponent.prototype, "cardEdit", void 0);
+                __decorate([
+                    core_1.Input('cardArray'), 
+                    __metadata('design:type', Array)
+                ], CardComponent.prototype, "cardArray", void 0);
+                __decorate([
+                    core_1.Input('cardTitle'), 
+                    __metadata('design:type', String)
+                ], CardComponent.prototype, "title", void 0);
                 CardComponent = __decorate([
                     core_1.Component({
                         selector: 'card-with-title',
                         templateUrl: '../app/component/profiler/cards/cards.html',
+                        styleUrls: ['../app/component/profiler/cards/card.css'],
+                        providers: [delayService_1.DelayService],
                         directives: [router_1.ROUTER_DIRECTIVES]
                     }), 
-                    __metadata('design:paramtypes', [router_1.RouteParams])
+                    __metadata('design:paramtypes', [router_1.RouteParams, delayService_1.DelayService])
                 ], CardComponent);
                 return CardComponent;
             }());

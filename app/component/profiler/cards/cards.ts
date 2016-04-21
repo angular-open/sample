@@ -1,98 +1,74 @@
 import {Component, Input, OnInit} from 'angular2/core';
 import {NgForm} from 'angular2/common';
 import {RouteParams, ROUTER_DIRECTIVES} from 'angular2/router';
+import {DelayService} from '../../../service/delayService';
+
 import CardInfo = require("cardinfo");
 
 @Component({
     selector: 'card-with-title',
     templateUrl: '../app/component/profiler/cards/cards.html',
+    styleUrls: ['../app/component/profiler/cards/card.css'],
+    providers: [DelayService],
     directives: [ROUTER_DIRECTIVES]
 })
 export class CardComponent implements OnInit {
     @Input('cardEdit') cardEdit: boolean;
+    @Input('cardArray') cardArray: CardInfo[];
+    @Input('cardTitle') title: string;
 
     private cardEditUi: boolean = false;
-    private title: string;
     private editStatus: boolean = false;
-    private arrayData;
-    private cardInfo = {};
-    private card = {};
+    private cardInfo: CardInfo;
     private year = [];
+    private editOpen: boolean = false;
+    private today: Date = new Date();
 
-    constructor(private _routeParams: RouteParams) {
-        var today = new Date();
-        for (var i = 1930; i <= today.getFullYear() + 1; i++) {
-            this.year.push(i);
-        }
-        this.cardInfo = {
-            from: 0,
-            to: 0,
-            headingOne: "",
-            headingTwo: ""
-        };
+    constructor(private _routeParams: RouteParams, private delayAsyn: DelayService) {
 
-        this.title = "5 Years of Experience";
-        this.arrayData = [
-            {
-                year: {
-                    from: 2015,
-                    to: 2016
-                },
-                title: "Senior web&ux Designer",
-                subTitle: "Company name"
-            },
-            {
-                year: {
-                    from: 2016,
-                    to: 2017
-                },
-                title: "Senior web&ux Designer",
-                subTitle: "Company name"
-            },
-        ];
     }
 
     ngOnInit() {
         let id = this._routeParams.get('profileurl');
-        console.log(id)
+        console.log(id);
+
+        for (var i = 1930; i <= this.today.getFullYear() + 1; i++) {
+            this.year.push(i);
+        }
     }
 
-    public OpenEdit() {
-        this.editStatus = this.editStatus ? false : true;
-        this.cardEditUi = this.cardEditUi ? false : true;
-    }
-
-    public onSubmit(cardInfo: CardInfo) {
-        console.log(cardInfo);
-        var datas = {
-            year: {
-                from: cardInfo.from,
-                to: cardInfo.to
-            },
-            title: cardInfo.headingOne,
-            subTitle: cardInfo.headingTwo
+    public AddCard() {
+        if (this.cardArray.length > 0) {
+            this.cardArray[0].addAnim = false;
         }
 
-        this.arrayData.unshift(datas);
-        this.cardInfo = {
+        this.cardArray.forEach(function (element) {
+            element.removeAnim = false;
+        })
+
+        var card = {
             from: 0,
             to: 0,
-            headingOne: "",
-            headingTwo: ""
-        };
+            title: "",
+            subTitle: "",
+            editInfo: true,
+            addAnim: true,
+            removeAnim: false
+        }
+
+        this.cardArray.unshift(card);
     }
 
-    public onKey(event: any) {
-        return event;
+    public OpenEdit(event, model, editStatus) {
+        model.editInfo = editStatus;
     }
 
-    public selectionChange(e) {
-        console.log(e);
-        this.cardInfo = {
-            from: e.year.from,
-            to: e.year.to,
-            headingOne: e.title,
-            headingTwo: e.subTitle
-        };
+    public DeleteCard(event, index, model) {
+        model.removeAnim = true;
+        var array = this.cardArray;
+        this.delayAsyn.Delay(300, function (i) {
+            array.splice(index, 1);
+            this.cardArray = array;
+        }, index);
     }
 }

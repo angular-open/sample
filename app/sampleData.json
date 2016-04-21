@@ -1,0 +1,70 @@
+{
+    "data": [
+        {
+            "searchUrl": "sample",
+            "basicInfo": {
+                "title": "Mr",
+                "name": "Sample Name",
+                "phoneNumber": 9715261931,
+                "address": "No. 50 second cross, kargil nagar, velrampet.",
+                "currentProfession": "Web & UI Developer"
+            },
+            "objective": "These samples of resumes and cover letters are intended purely as a guide to what is possible. Do not simply try to copy them for your own resume, because your resume should be unique (like you!).",
+            "about": "These samples of resumes and cover letters are intended purely as a guide to what is possible. Do not simply try to copy them for your own resume, because your resume should be unique (like you!).",
+            "knowledge": [
+                "INSTALL AND CONFIGURE",
+                "WEB USABILITY"
+            ],
+            "skill": [
+                {
+                    "title": "WORDPRESS",
+                    "percentage": 80
+                },
+                {
+                    "title": "HTML&CSS",
+                    "percentage": 60
+                }
+            ],
+            "exprience": [
+                {
+                    "from": 2015,
+                    "to": 2016,
+                    "title": "Seniors web&ux Designer",
+                    "subTitle": "Company name",
+                    "editInfo": false,
+                    "addAnim": false,
+                    "removeAnim": false
+                },
+                {
+                    "from": 2016,
+                    "to": 2017,
+                    "title": "Senior web&ux Designer",
+                    "subTitle": "Company name",
+                    "editInfo": false,
+                    "addAnim": false,
+                    "removeAnim": false
+                }
+            ],
+            "education": [
+                {
+                    "from": 2015,
+                    "to": 2016,
+                    "title": "RGCET",
+                    "subTitle": "MCA",
+                    "editInfo": false,
+                    "addAnim": false,
+                    "removeAnim": false
+                },
+                {
+                    "from": 2016,
+                    "to": 2017,
+                    "title": "St. joseph",
+                    "subTitle": "Bsc",
+                    "editInfo": false,
+                    "addAnim": false,
+                    "removeAnim": false
+                }
+            ]
+        }
+    ]
+}

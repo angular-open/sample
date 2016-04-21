@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', './cards/cards'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', './cards/cards', '../../service/delayService', '../../service/profileService/profileService'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/router', './cards/cards'], function(
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, cards_1;
+    var core_1, router_1, cards_1, delayService_1, profileService_1;
     var ProfilerComponent;
     return {
         setters:[
@@ -22,26 +22,42 @@ System.register(['angular2/core', 'angular2/router', './cards/cards'], function(
             },
             function (cards_1_1) {
                 cards_1 = cards_1_1;
+            },
+            function (delayService_1_1) {
+                delayService_1 = delayService_1_1;
+            },
+            function (profileService_1_1) {
+                profileService_1 = profileService_1_1;
             }],
         execute: function() {
             ProfilerComponent = (function () {
-                function ProfilerComponent(_routeParams) {
+                function ProfilerComponent(_routeParams, delayAsyn, profileService) {
                     this._routeParams = _routeParams;
+                    this.delayAsyn = delayAsyn;
+                    this.profileService = profileService;
                     this.editStatus = false;
                 }
                 ProfilerComponent.prototype.ngOnInit = function () {
-                    this.userUrl = this._routeParams.get('profileurl');
-                    if (this._routeParams.get('edit')) {
-                        this.editStatus = this._routeParams.get('edit') == "edit" ? true : false;
+                    var self = this;
+                    self.userUrl = self._routeParams.get('profileurl');
+                    if (self._routeParams.get('edit')) {
+                        self.editStatus = self._routeParams.get('edit') == "edit" ? true : false;
                     }
-                    console.log(this.userUrl);
+                    self.profileService.getProfile().subscribe(function (data) { return self.successOn(data); }, function (error) { return console.log(error); });
+                    self.workExperienceTitle = "Work Experience";
+                    self.educationTitle = "Education Value";
+                };
+                ProfilerComponent.prototype.successOn = function (result) {
+                    this.expList = result.exprience;
+                    this.eduList = result.education;
                 };
                 ProfilerComponent = __decorate([
                     core_1.Component({
                         templateUrl: '../app/component/profiler/profiler.html',
-                        directives: [router_1.ROUTER_DIRECTIVES, cards_1.CardComponent]
+                        directives: [router_1.ROUTER_DIRECTIVES, cards_1.CardComponent],
+                        providers: [delayService_1.DelayService, profileService_1.ProfileService]
                     }), 
-                    __metadata('design:paramtypes', [router_1.RouteParams])
+                    __metadata('design:paramtypes', [router_1.RouteParams, delayService_1.DelayService, profileService_1.ProfileService])
                 ], ProfilerComponent);
                 return ProfilerComponent;
             }());

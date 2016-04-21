@@ -1,20 +1,49 @@
-<div class="row" [hidden]="cardEditUi" style="padding-left:20px;">
+<div class="row" style="padding-left:21px;">
     <h3 style="color:#6098CB; text-transform: uppercase; font-size:16px; font-weight:bold; letter-spacing:1; display:inline-table;">{{title}}</h3>
-    <div *ngIf="cardEdit" (click)="OpenEdit()" style="display:inline-table; color: #000; font-size: 20px;"><i class="fa fa-pencil"></i></div>
-    <div *ngFor="#item of arrayData" style="background-color:#fff; box-shadow: 1px 1px 1px 1px #ccc; min-height:50px; overflow: hidden; max-height: 80px; color:#444; margin-bottom:10px;">
-        <div class="col-lg-4" style="background-color:#6098CB; height:80px; position:relative;">
-            <div style="position:absolute; font-weight:600; text-align:center; color:#fff; font-size:14px; top: 50%; left: 50%; -webkit-transform: translate(-50%, -50%);">{{item.year.from}} - {{item.year.to}}</div>
+    <div *ngIf="cardEdit" (click)="AddCard()" class="add-card"><i class="fa fa-plus"></i></div>
+    <div *ngFor="#item of cardArray; #i = index " class="card-continer" [class.card-continer-add-anim]="item.addAnim" [class.card-continer-remove-anim]="item.removeAnim">
+        <div class="row card-inner-first-row" [class.first-box-close]="item.editInfo">
+            <div class="col-lg-4 col-1">
+                <div class="col-content">{{item.from}} - {{item.to}}</div>
+            </div>
+            <div class="col-lg-8" style="height:80px; position:relative;">
+                <div *ngIf="cardEdit" class="edit-card" (click)="OpenEdit($event, item, true)"><i class="fa fa-pencil" aria-hidden="true"></i></div>
+                <div *ngIf="cardEdit" class="delete-card" (click)="DeleteCard($event, i, item)"><i class="fa fa-trash-o" aria-hidden="true"></i></div>
+                <div style="width: 100%; padding: 15px;">
+                    <div style="text-transform: uppercase; font-size:14px; ">{{item.title}}</div>
+                    <div style="text-transform: capitalize; font-size:10px; ">{{item.subTitle}}</div>
+                </div>
+            </div>
         </div>
-        <div class="col-lg-8" style="height:80px; position:relative;">
-            <div style="width: 100%; padding: 15px;">
-                <div style="text-transform: uppercase; font-size:14px; ">{{item.title}}</div>
-                <div style="text-transform: capitalize; font-size:10px; ">{{item.subTitle}}</div>
+        <div *ngIf="cardEdit" class="row card-inner-second-row" [class.second-box-open]="item.editInfo">
+            <div class="col-lg-4 edit-col1">
+                <div class="col-content" style="width:100%; color:000;">
+                    <select #cardFrom required [(ngModel)]="item.from" style="display:inline-table; padding:3px 5px; font-size:12px; border: 1px solid #ccc;">
+                    <option value="0" selected>From</option>
+                    <option *ngFor="#p of year" [value]="p">{{p}}</option>
+                   </select>
+                    <select #cardTo required [(ngModel)]="item.to" style="display:inline-table; padding:3px 5px; font-size:12px; border: 1px solid #ccc;">
+                    <option value="0">To</option>
+                    <option *ngFor="#p of year" [value]="p">{{p}}</option>
+                   </select>
+                </div>
+            </div>
+            <div class="col-lg-8 edit-col2" style="height:80px; position:relative;">
+                <div *ngIf="cardEdit" class="close-card" (click)="OpenEdit($event, item, false)"><i class="fa fa-times" aria-hidden="true"></i></div>
+                <div *ngIf="cardEdit" class="delete-card" (click)="DeleteCard($event, i, item)"><i class="fa fa-trash-o" aria-hidden="true"></i></div>
+                <div style="width: 100%; padding: 15px;">
+                    <input #cardHeadingOne placeholder="Title" required [(ngModel)]="item.title" style="display:block; padding:3px 5px; font-size:12px; border: 1px solid #ccc;"
+                    />
+                    <input #cardHeadingTwo placeholder="Sub Title" required [(ngModel)]="item.subTitle" style="display:block; padding:3px 5px; font-size:12px; border: 1px solid #ccc;"
+                    />
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="row" *ngIf="cardEdit" style="padding-left:20px; padding-top:10px;">
+
+<!--<div class="row" *ngIf="cardEdit" style="padding-left:20px; padding-top:10px;">
     <div [hidden]="!cardEditUi" (click)="OpenEdit()" style="color: #000; font-size: 14px;"><i class="fa fa-chevron-left"></i> Back</div>
     <div [hidden]="!cardEditUi" style="color:#000; padding-top:10px;" class="col-lg-8">
         <label for="cardTitle" style="display:inline-table; min-width:120px;">Card Title</label>
@@ -25,7 +54,7 @@
                 <label for="cardFrom" style="display:inline-table; min-width:120px;">Year From</label>
                 <!--<input #cardFrom placeholder="Year From" required [(ngModel)]="cardInfo.from" style="display:inline-table; padding:3px 5px; font-size:12px; border: 1px solid #ccc;"
                 />-->
-                <select #cardFrom required [(ngModel)]="cardInfo.from" style="display:inline-table; padding:3px 5px; font-size:12px; border: 1px solid #ccc;">
+<!--<select #cardFrom required [(ngModel)]="cardInfo.from" style="display:inline-table; padding:3px 5px; font-size:12px; border: 1px solid #ccc;">
                     <option value="0" selected>Select From</option>
                     <option *ngFor="#p of year" [value]="p">{{p}}</option>
                 </select>
@@ -34,7 +63,7 @@
                 <label for="cardTo" style="display:inline-table; min-width:120px;">Year To</label>
                 <!--<input #cardTo placeholder="Year To" required [(ngModel)]="cardInfo.to" style="display:inline-table; padding:3px 5px; font-size:12px; border: 1px solid #ccc;"
                 />-->
-                <select #cardTo required [(ngModel)]="cardInfo.to" style="display:inline-table; padding:3px 5px; font-size:12px; border: 1px solid #ccc;">
+<!--<select #cardTo required [(ngModel)]="cardInfo.to" style="display:inline-table; padding:3px 5px; font-size:12px; border: 1px solid #ccc;">
                     <option value="0">Select To</option>
                     <option *ngFor="#p of year" [value]="p">{{p}}</option>
                 </select>
@@ -60,4 +89,4 @@
             <div style="text-transform: capitalize; font-size:10px; ">{{item.subTitle}}</div>
         </div>
     </div>
-</div>
+</div>-->
