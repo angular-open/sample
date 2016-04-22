@@ -1,2 +1,4 @@
-HOME
-<a [routerLink]="['Login']">login</a>
+HOME PAGE
+<input type="text" #urlValue placeholder="Enter Your URL" [(ngModel)]="url"/>
+<a [routerLink]="['Profiler', {profileurl: url}]">View</a>
+<a [routerLink]="['Login']">Create</a>

@@ -23,28 +23,8 @@
             <div class="col-lg-3" style="padding-left:20px;">
                 <titl-with-text-area [cardEdit]="editStatus" [cardMessage]="aboutMessage" [cardTitle]="aboutTitle"></titl-with-text-area>
                 <titl-with-text-area [cardEdit]="editStatus" [cardMessage]="objectiveMessage" [cardTitle]="objectiveTitle"></titl-with-text-area>
-                <div class="row" style="padding-left:30px;">
-                    <h3 style="color:#6098CB; text-transform: uppercase; font-size:16px; font-weight:bold; letter-spacing:1;">Knowledge</h3>
-                    <ul style="color:#444; text-transform: uppercase; font-size:11px; padding-left:20px;">
-                        <li style="margin-bottom:5px;">install and configure</li>
-                        <li style="margin-bottom:5px;">web usability</li>
-                    </ul>
-                </div>
-                <div class="row" style="padding-left:30px; color:#444;">
-                    <h3 style="color:#6098CB; text-transform: uppercase; font-size:16px; font-weight:bold; letter-spacing:1;">Skills</h3>
-                    <div style="text-transform: uppercase; font-size:12px; margin-bottom:8px;">
-                        <div style="margin-bottom:2px;">Wordpress - 80%</div>
-                        <div style="border:1px solid #ccc; width:85%;">
-                            <div style="width:80%; height:6px; background-color:#6098CB;"></div>
-                        </div>
-                    </div>
-                    <div style="text-transform: uppercase; font-size:12px; margin-bottom:8px;">
-                        <div style="margin-bottom:2px;">Html&css - 60%</div>
-                        <div style="border:1px solid #ccc; width:85%;">
-                            <div style="width:60%; height:6px; background-color:#6098CB;"></div>
-                        </div>
-                    </div>
-                </div>
+                <list-item [cardEdit]="editStatus" [listItem]="knowledgeList" [listTitle]="knowledgeTitle"></list-item>
+                <list-item-with-progress [cardEdit]="editStatus" [listItem]="skillList" [listTitle]="skillTitle"></list-item-with-progress>
             </div>
             <div class="col-lg-9">
                 <card-with-title [cardEdit]="editStatus" [cardArray]="expList" [cardTitle]="workExperienceTitle"></card-with-title>

@@ -1,14 +1,15 @@
 import {Injectable} from 'angular2/core';
 import {Http, Response, Headers} from 'angular2/http';
 import {Observable}     from 'rxjs/Observable';
+import {Router, Location} from "angular2/router";
 import 'rxjs/Rx';
 
 @Injectable()
 export class HttpServices {
     private apiUrl = 'http://localhost:9080/api/';
     private headers: Headers;
-
-    constructor(private http: Http) {
+ 
+    constructor(private http: Http, private router: Router, private location: Location) {
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/json');
     }
@@ -21,7 +22,7 @@ export class HttpServices {
     }
 
     private ErrorHandler(error: Response) {
-        console.error(error);
-        return Observable.throw(error.json().error || 'Server error');
+        console.log(error.json());
+        return Observable.throw(error.json() || null);
     }
 }

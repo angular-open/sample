@@ -27,7 +27,7 @@ System.register(['angular2/platform/browser', 'angular2/core', 'angular2/router'
                 router_1.ROUTER_PROVIDERS,
                 http_1.HTTP_PROVIDERS,
                 core_1.provide(router_1.ROUTER_PROVIDERS, { useValue: '/' }),
-                httpServices_1.HttpServices
+                httpServices_1.HttpServices,
             ]);
         }
     }

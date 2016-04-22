@@ -11,5 +11,5 @@ bootstrap(AppComponent, [
     ROUTER_PROVIDERS,
     HTTP_PROVIDERS,
     provide(ROUTER_PROVIDERS, { useValue: '/' }),
-    HttpServices
+    HttpServices,
 ]);

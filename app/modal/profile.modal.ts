@@ -3,7 +3,7 @@ class ProfileData {
     public basicInfo: BasicInfo;
     public objective: string;
     public about: string;
-    public knowledge: string[];
+    public knowledge: Knowledge[];
     public skill: Skill[];
     public exprience: CardInfo[];
     public education: CardInfo[];
@@ -38,10 +38,23 @@ class Skill {
     public percentage: number;
 }
 
+class Knowledge   {
+    public title :string;
+    public editStatus: boolean;
+}
+
 declare module 'cardinfo' {
     export = CardInfo;
 }
 
 declare module 'profileData' {
     export = ProfileData;
+}
+
+declare module 'knowledge' {
+    export = Knowledge;
+}
+
+declare module 'skill' {
+    export = Skill;
 }
