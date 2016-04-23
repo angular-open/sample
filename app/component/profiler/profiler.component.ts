@@ -6,6 +6,7 @@ import {ListComponent} from './list/list.component';
 import {ListWithProgressComponent} from './listwithprogressbar/listwithprogressbar.component';
 import {DelayService} from '../../service/delayService';
 import {ProfileService} from '../../service/profileService/profileService';
+import {ProfileStorage} from '../../shared/profile.storage';
 import CardInfo = require("cardinfo");
 import Profile = require("profileData");
 import Knowledge = require("knowledge")
@@ -13,7 +14,7 @@ import Knowledge = require("knowledge")
 @Component({
     templateUrl: '../app/component/profiler/profiler.html',
     directives: [ROUTER_DIRECTIVES, CardComponent, TitleWithTextAreaComponent, ListComponent, ListWithProgressComponent],
-    providers: [DelayService, ProfileService]
+    providers: [DelayService, ProfileService, ProfileStorage]
 })
 
 export class ProfilerComponent implements OnInit {
@@ -36,7 +37,8 @@ export class ProfilerComponent implements OnInit {
     constructor(private _routeParams: RouteParams,
         private delayAsyn: DelayService,
         private profileService: ProfileService,
-        private route: Router) {
+        private route: Router,
+        private profileStorage: ProfileStorage) {
     }
 
     ngOnInit() {
@@ -48,16 +50,20 @@ export class ProfilerComponent implements OnInit {
             self.editStatus = (paramsValue == "edit" || paramsValue == "create") ? true : false;
         }
 
-        self.profileService.getProfile(self.userUrl).subscribe(
-            data => self.SuccessOn(data),
-            error => self.ErrorOn(error, this.route));
-
         self.workExperienceTitle = "Work Experience";
         self.educationTitle = "Education Value";
         self.objectiveTitle = "Objective";
         self.aboutTitle = "About";
         self.knowledgeTitle = "Knowledge";
         self.skillTitle = "Skill";
+        let data = self.profileStorage.GetProfile();
+        if (data) {
+            self.SuccessOn(data);
+        } else {
+            self.profileService.getProfile(self.userUrl).subscribe(
+                data => self.SuccessOn(data),
+                error => self.ErrorOn(error, this.route));
+        }
     }
 
     public SuccessOn(result: Profile) {

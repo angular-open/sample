@@ -11,7 +11,8 @@ import Profile = require("profileData");
 
 @Injectable()
 export class ProfileService {
-    private dataUrl = 'getProfile';
+    private dataGetProfileUrl = 'getProfile';
+    private dataCheckAndGetProfileUrl = 'checkProfile';
 
     constructor(private httpServices: HttpServices) { }
 
@@ -21,6 +22,15 @@ export class ProfileService {
             profileUrl: profileUrl
         };
 
-        return this.httpServices.PostHttp(JSON.stringify(data), this.dataUrl).map(res => <Profile>res.json());
+        return this.httpServices.PostHttp(JSON.stringify(data), this.dataGetProfileUrl).map(res => <Profile>res.json());
+    }
+    
+    checkProfile(profileUrl: string){
+        var self = this;
+        var data = {
+            profileUrl: profileUrl
+        };
+
+        return this.httpServices.PostHttp(JSON.stringify(data), this.dataCheckAndGetProfileUrl).map(res => <Profile>res.json());
     }
 }

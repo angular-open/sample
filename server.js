@@ -30,7 +30,7 @@ app.post('/api/getProfile', function (req, res) {
         .populate('skill')
         .populate('knowledge')
         .exec(function (error, profile) {
-            var result = JSON.stringify(profile, null, "\t")
+            var result = JSON.stringify(profile, null, "\t");
             if (result != "null") {
                 res.send(result);
             } else {
@@ -41,7 +41,7 @@ app.post('/api/getProfile', function (req, res) {
                 res.status(403).send(err);
             }
 
-        })
+        });
 
 });
 
@@ -53,8 +53,21 @@ app.get('/api/editProfile', function (req, res) {
     res.send(priofileData);
 });
 
-app.get('/api/checkProfile', function (req, res) {
-    res.send(priofileData);
+app.post('/api/checkProfile', function (req, res) {
+    var objData = req.body;
+    database.profileDB.findOne({ searchUrl: objData.profileUrl })
+        .exec(function (error, profile) {
+            var result = JSON.stringify(profile, null, "\t");
+            if (result != "null") {
+                res.send(result);
+            } else {
+                var err = {
+                    message: "url not exit please create",
+                    status: "1020"
+                };
+                res.status(403).send(err);
+            }
+        });
 });
 
 console.log(__dirname);

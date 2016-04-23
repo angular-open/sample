@@ -38,8 +38,8 @@ class Skill {
     public percentage: number;
 }
 
-class Knowledge   {
-    public title :string;
+class Knowledge {
+    public title: string;
     public editStatus: boolean;
 }
 

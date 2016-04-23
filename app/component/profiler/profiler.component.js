@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', './cards/cards.component', './titlewithtextarea/titlewithtextarea.component', './list/list.component', './listwithprogressbar/listwithprogressbar.component', '../../service/delayService', '../../service/profileService/profileService'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', './cards/cards.component', './titlewithtextarea/titlewithtextarea.component', './list/list.component', './listwithprogressbar/listwithprogressbar.component', '../../service/delayService', '../../service/profileService/profileService', '../../shared/profile.storage'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/router', './cards/cards.component', 
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, cards_component_1, titlewithtextarea_component_1, list_component_1, listwithprogressbar_component_1, delayService_1, profileService_1;
+    var core_1, router_1, cards_component_1, titlewithtextarea_component_1, list_component_1, listwithprogressbar_component_1, delayService_1, profileService_1, profile_storage_1;
     var ProfilerComponent;
     return {
         setters:[
@@ -37,14 +37,18 @@ System.register(['angular2/core', 'angular2/router', './cards/cards.component', 
             },
             function (profileService_1_1) {
                 profileService_1 = profileService_1_1;
+            },
+            function (profile_storage_1_1) {
+                profile_storage_1 = profile_storage_1_1;
             }],
         execute: function() {
             ProfilerComponent = (function () {
-                function ProfilerComponent(_routeParams, delayAsyn, profileService, route) {
+                function ProfilerComponent(_routeParams, delayAsyn, profileService, route, profileStorage) {
                     this._routeParams = _routeParams;
                     this.delayAsyn = delayAsyn;
                     this.profileService = profileService;
                     this.route = route;
+                    this.profileStorage = profileStorage;
                     this.editStatus = false;
                 }
                 ProfilerComponent.prototype.ngOnInit = function () {
@@ -55,13 +59,19 @@ System.register(['angular2/core', 'angular2/router', './cards/cards.component', 
                         var paramsValue = self._routeParams.get('edit');
                         self.editStatus = (paramsValue == "edit" || paramsValue == "create") ? true : false;
                     }
-                    self.profileService.getProfile(self.userUrl).subscribe(function (data) { return self.SuccessOn(data); }, function (error) { return self.ErrorOn(error, _this.route); });
                     self.workExperienceTitle = "Work Experience";
                     self.educationTitle = "Education Value";
                     self.objectiveTitle = "Objective";
                     self.aboutTitle = "About";
                     self.knowledgeTitle = "Knowledge";
                     self.skillTitle = "Skill";
+                    var data = self.profileStorage.GetProfile();
+                    if (data) {
+                        self.SuccessOn(data);
+                    }
+                    else {
+                        self.profileService.getProfile(self.userUrl).subscribe(function (data) { return self.SuccessOn(data); }, function (error) { return self.ErrorOn(error, _this.route); });
+                    }
                 };
                 ProfilerComponent.prototype.SuccessOn = function (result) {
                     console.log(result);
@@ -84,9 +94,9 @@ System.register(['angular2/core', 'angular2/router', './cards/cards.component', 
                     core_1.Component({
                         templateUrl: '../app/component/profiler/profiler.html',
                         directives: [router_1.ROUTER_DIRECTIVES, cards_component_1.CardComponent, titlewithtextarea_component_1.TitleWithTextAreaComponent, list_component_1.ListComponent, listwithprogressbar_component_1.ListWithProgressComponent],
-                        providers: [delayService_1.DelayService, profileService_1.ProfileService]
+                        providers: [delayService_1.DelayService, profileService_1.ProfileService, profile_storage_1.ProfileStorage]
                     }), 
-                    __metadata('design:paramtypes', [router_1.RouteParams, delayService_1.DelayService, profileService_1.ProfileService, router_1.Router])
+                    __metadata('design:paramtypes', [router_1.RouteParams, delayService_1.DelayService, profileService_1.ProfileService, router_1.Router, profile_storage_1.ProfileStorage])
                 ], ProfilerComponent);
                 return ProfilerComponent;
             }());
