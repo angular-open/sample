@@ -5,9 +5,39 @@ var mongoUrl = "mongodb://surendarr:Ss9715261931@ds011231.mlab.com:11231/profile
 
 mongoose.connect(mongoUrl);
 
+var user = new Schema({
+    username: {
+        type: String,
+        index: {
+            unique: true
+        },
+        trim: true,
+        required: 'Username is required',
+    },
+    email:{
+        type: String,
+        index: {
+            unique: true
+        },
+        trim: true,
+        required: 'Email address is required',
+        match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address'],
+    },
+    profile: [
+        {
+            type: ObjectId,
+            ref: 'Profiles'
+        }
+    ],
+    
+});
+
+var userDB = mongoose.model("Users", user);
+
 var profile = new Schema({
     searchUrl: {
         type: String,
+        trim: true,
         index: {
             unique: true
         }
@@ -94,5 +124,6 @@ module.exports = {
     knowledgeDB: knowledgeDB,
     skillDB: skillDB,
     exprienceDB: exprienceDB,
-    educationDB: educationDB
+    educationDB: educationDB,
+    userDB: userDB
 }

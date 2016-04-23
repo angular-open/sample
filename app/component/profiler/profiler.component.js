@@ -65,13 +65,7 @@ System.register(['angular2/core', 'angular2/router', './cards/cards.component', 
                     self.aboutTitle = "About";
                     self.knowledgeTitle = "Knowledge";
                     self.skillTitle = "Skill";
-                    var data = self.profileStorage.GetProfile();
-                    if (data) {
-                        self.SuccessOn(data);
-                    }
-                    else {
-                        self.profileService.getProfile(self.userUrl).subscribe(function (data) { return self.SuccessOn(data); }, function (error) { return self.ErrorOn(error, _this.route); });
-                    }
+                    self.profileService.getProfile(self.userUrl).subscribe(function (data) { return self.SuccessOn(data); }, function (error) { return self.ErrorOn(error, _this.route); });
                 };
                 ProfilerComponent.prototype.SuccessOn = function (result) {
                     console.log(result);

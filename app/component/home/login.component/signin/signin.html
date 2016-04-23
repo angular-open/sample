@@ -1,0 +1,14 @@
+<div #signInPanel class="sign-in-panel" [hidden]="!signIn">
+    <div>
+        <input type="text" placeholder="Username" />
+        <input type="password" placeholder="Password" />
+    </div>
+    <div class="margin-t-5p">
+        <button type="submit" class="submit-btn">
+                                <i class="fa fa-check" aria-hidden="true"></i>
+                            </button>
+        <button (click)="closePanel()" class="err-btn">
+                                <i class="fa fa-times" aria-hidden="true"></i>
+                            </button>
+    </div>
+</div>

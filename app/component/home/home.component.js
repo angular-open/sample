@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', './modal/urlform.model', '../../service/delayService', '../../service/profileService/profileService', '../../shared/profile.storage'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', './modal/urlform.model', '../../service/delayService', '../../service/profileService/profileService', '../../shared/profile.storage', './login.component/login.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/router', './modal/urlform.model', '.
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, urlform_model_1, delayService_1, profileService_1, profile_storage_1;
+    var core_1, router_1, urlform_model_1, delayService_1, profileService_1, profile_storage_1, login_component_1;
     var HomeComponent;
     return {
         setters:[
@@ -31,6 +31,9 @@ System.register(['angular2/core', 'angular2/router', './modal/urlform.model', '.
             },
             function (profile_storage_1_1) {
                 profile_storage_1 = profile_storage_1_1;
+            },
+            function (login_component_1_1) {
+                login_component_1 = login_component_1_1;
             }],
         execute: function() {
             HomeComponent = (function () {
@@ -39,11 +42,15 @@ System.register(['angular2/core', 'angular2/router', './modal/urlform.model', '.
                     this.profileService = profileService;
                     this.route = route;
                     this.profileStorage = profileStorage;
+                    this.userLoginStatus = false;
                     this.urlModel = new urlform_model_1.UrlForm("");
                     this.active = true;
                     this.errorMessage = "";
                 }
                 HomeComponent.prototype.ngOnInit = function () {
+                    if (localStorage.getItem("userStatus")) {
+                        this.userLoginStatus = true;
+                    }
                 };
                 HomeComponent.prototype.addAndRemoveAnimation = function (classStatus, topElement, bottomElement, errorElement) {
                     console.log(classStatus);
@@ -99,7 +106,12 @@ System.register(['angular2/core', 'angular2/router', './modal/urlform.model', '.
                     var customError = err;
                     if (customError) {
                         if (customError && customError.status == "1020") {
-                            this.errorMessage = "Create Url";
+                            if (this.userLoginStatus) {
+                                this.errorMessage = "Create Url";
+                            }
+                            else {
+                                this.errorMessage = "sign in and create url";
+                            }
                             if (errorElement.classList.contains("error-message-show")) {
                                 errorElement.classList.remove("error-message-show");
                                 errorElement.classList.add("error-message-show");
@@ -115,7 +127,7 @@ System.register(['angular2/core', 'angular2/router', './modal/urlform.model', '.
                         selector: 'Home-View',
                         templateUrl: '../app/component/home/home.html',
                         styleUrls: ['../app/component/home/home.css'],
-                        directives: [router_1.ROUTER_DIRECTIVES],
+                        directives: [router_1.ROUTER_DIRECTIVES, login_component_1.LoginComponent],
                         providers: [delayService_1.DelayService, profileService_1.ProfileService, profile_storage_1.ProfileStorage]
                     }), 
                     __metadata('design:paramtypes', [delayService_1.DelayService, profileService_1.ProfileService, router_1.Router, profile_storage_1.ProfileStorage])

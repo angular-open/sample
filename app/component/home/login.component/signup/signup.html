@@ -1,0 +1,22 @@
+<div #signUpPanel class="sign-up-panel" [hidden]="!signUp">
+    <form *ngIf="active" [ngFormModel]="signUpForm" (ngSubmit)="onSubmit(signUpForm)" novalidate>
+        <div>
+            <div>
+                <input #username="ngForm" type="text" [ngFormControl]="signUpForm.controls['username']"  required placeholder="Username" />
+                <input #email="ngForm" type="text" [ngFormControl]="signUpForm.controls['email']" required placeholder="Email" />
+            </div>
+            <div class="margin-t-5p">
+                <input type="password" #password="ngForm" [ngFormControl]="signUpForm.controls['password']"  required placeholder="Password" />
+                <input type="password" [class.ng-invalid]="signUpForm.hasError('mismatchedPasswords')" [class.ng-valid]="!signUpForm.hasError('mismatchedPasswords')" #conformpassword="ngForm" [ngFormControl]="signUpForm.controls['conformpassword']" required placeholder="Conform Password" />
+            </div>
+        </div>
+        <div class="margin-t-5p">
+            <button type="submit" class="submit-btn">
+                                <i class="fa fa-check" aria-hidden="true"></i>
+                            </button>
+            <button (click)="closePanel(signUpForm)" class="err-btn">
+                                <i class="fa fa-times" aria-hidden="true"></i>
+                            </button>
+        </div>
+    </form>
+</div>

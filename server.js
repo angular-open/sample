@@ -70,6 +70,23 @@ app.post('/api/checkProfile', function (req, res) {
         });
 });
 
+app.post('/api/createUser', function (req, res) {
+    var objData = req.body;
+
+    var user = new database.userDB(objData);
+    user.save(function (error) {
+        if (!error) {
+            database.userDB.find({ username: objData.username })
+                .select('username', 'email', 'profile')
+                .populate('Profiles', 'searchUrl')
+                .exec(function (error, posts) {
+                    console.log(JSON.stringify(posts))
+                })
+        }
+    });
+});
+
+
 console.log(__dirname);
 app.listen(port, ip);
 

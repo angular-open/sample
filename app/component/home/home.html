@@ -23,8 +23,12 @@
                 <h4 #errorElement class="error-message-hide">{{errorMessage}}</h4>
             </div>
         </form>
+        <div #createPanel style="text-align:center; font-size:12px;">
+            <Login-View [hidden]="userLoginStatus"></Login-View>
+            <div [hidden]="!userLoginStatus">
+                WELCOME Surendar
+            </div>
+        </div>
     </div>
-    <div #createPanel>
-        asdkjfkajsdflkjsdf
-    </div>
+
 </div>

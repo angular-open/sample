@@ -1,0 +1,13 @@
+<div>
+    <div #signInSignUpContiner class="close-sing-in-up-panel">
+        <Sign-In-View [signin]="signIn" (closesignin)="closePanel(btnSignInSignUpPanel,signInSignUpContiner, $event)"></Sign-In-View>
+        <Sign-Up-View [signup]="signUp" (closesignup)="closePanel(btnSignInSignUpPanel,signInSignUpContiner, $event)"></Sign-Up-View>
+        
+    </div>
+
+    <div #btnSignInSignUpPanel class="btn-sign-in-up-panel-open">
+        <button class="submit-btn" (click)="openSignIn(btnSignInSignUpPanel, signInSignUpContiner,signInPanel)"> SIGN IN </button>
+        <button class="submit-btn" (click)="openSignUp(btnSignInSignUpPanel, signInSignUpContiner,signUpPanel)"> SIGN UP </button>
+    </div>
+
+</div>

@@ -56,14 +56,9 @@ export class ProfilerComponent implements OnInit {
         self.aboutTitle = "About";
         self.knowledgeTitle = "Knowledge";
         self.skillTitle = "Skill";
-        let data = self.profileStorage.GetProfile();
-        if (data) {
-            self.SuccessOn(data);
-        } else {
-            self.profileService.getProfile(self.userUrl).subscribe(
-                data => self.SuccessOn(data),
-                error => self.ErrorOn(error, this.route));
-        }
+        self.profileService.getProfile(self.userUrl).subscribe(
+            data => self.SuccessOn(data),
+            error => self.ErrorOn(error, this.route));
     }
 
     public SuccessOn(result: Profile) {

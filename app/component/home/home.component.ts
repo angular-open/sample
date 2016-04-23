@@ -4,17 +4,21 @@ import {UrlForm}    from './modal/urlform.model';
 import {DelayService} from '../../service/delayService';
 import {ProfileService} from '../../service/profileService/profileService';
 import {ProfileStorage} from '../../shared/profile.storage';
+import {LoginComponent} from './login.component/login.component';
+
 import Profile = require("profileData");
 
 @Component({
     selector: 'Home-View',
     templateUrl: '../app/component/home/home.html',
     styleUrls: ['../app/component/home/home.css'],
-    directives: [ROUTER_DIRECTIVES],
+    directives: [ROUTER_DIRECTIVES, LoginComponent],
     providers: [DelayService, ProfileService, ProfileStorage]
 })
 
 export class HomeComponent implements OnInit {
+    private userLoginStatus: boolean = false;
+
     private urlModel = new UrlForm("");
     private active = true;
     private errorMessage: string;
@@ -28,7 +32,9 @@ export class HomeComponent implements OnInit {
     }
 
     ngOnInit() {
-
+        if (localStorage.getItem("userStatus")) {
+            this.userLoginStatus = true;
+        }
     }
 
     private addAndRemoveAnimation(classStatus: boolean, topElement: any, bottomElement: any, errorElement: any) {
@@ -86,7 +92,12 @@ export class HomeComponent implements OnInit {
         var customError = err;
         if (customError) {
             if (customError && customError.status == "1020") {
-                this.errorMessage = "Create Url";
+                if (this.userLoginStatus) {
+                    this.errorMessage = "Create Url";
+                } else {
+                    this.errorMessage = "sign in and create url";
+                }
+
                 if (errorElement.classList.contains("error-message-show")) {
                     errorElement.classList.remove("error-message-show");
                     errorElement.classList.add("error-message-show");
@@ -96,5 +107,7 @@ export class HomeComponent implements OnInit {
             }
         }
     }
+
+
 
 }
