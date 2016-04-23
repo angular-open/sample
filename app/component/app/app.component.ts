@@ -14,8 +14,8 @@ import {RegistrationComponent} from '../registration/registration.component';
 @RouteConfig([
     { path: '/', name: 'Home', component: HomeComponent, useAsDefault: true },
     { path: '/registration', name: 'Registration', component: RegistrationComponent },
-    { path: '/profiler/:profileurl', name: 'Profiler', component: ProfilerComponent },
-    { path: '/profiler/:profileurl/:edit', name: 'ProfilerEdit', component: ProfilerComponent }
+    { path: '/:profileurl', name: 'Profiler', component: ProfilerComponent },
+    { path: '/:profileurl/:edit', name: 'ProfilerEdit', component: ProfilerComponent }
 ])
 
 export class AppComponent { }

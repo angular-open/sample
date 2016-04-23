@@ -42,8 +42,8 @@ System.register(['angular2/core', 'angular2/router', '../home/home.component', '
                     router_1.RouteConfig([
                         { path: '/', name: 'Home', component: home_component_1.HomeComponent, useAsDefault: true },
                         { path: '/registration', name: 'Registration', component: registration_component_1.RegistrationComponent },
-                        { path: '/profiler/:profileurl', name: 'Profiler', component: profiler_component_1.ProfilerComponent },
-                        { path: '/profiler/:profileurl/:edit', name: 'ProfilerEdit', component: profiler_component_1.ProfilerComponent }
+                        { path: '/:profileurl', name: 'Profiler', component: profiler_component_1.ProfilerComponent },
+                        { path: '/:profileurl/:edit', name: 'ProfilerEdit', component: profiler_component_1.ProfilerComponent }
                     ]), 
                     __metadata('design:paramtypes', [])
                 ], AppComponent);
