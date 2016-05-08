@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', './cards/cards.component', './titlewithtextarea/titlewithtextarea.component', './list/list.component', './listwithprogressbar/listwithprogressbar.component', '../../service/delayService', '../../service/profileService/profileService', '../../shared/profile.storage'], function(exports_1, context_1) {
+System.register(['@angular/core', '@angular/router-deprecated', './cards/cards.component', './titlewithtextarea/titlewithtextarea.component', './list/list.component', './listwithprogressbar/listwithprogressbar.component', '../../service/delayService', '../../service/profileService/profileService', '../../shared/profile.storage'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,15 +10,15 @@ System.register(['angular2/core', 'angular2/router', './cards/cards.component', 
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, cards_component_1, titlewithtextarea_component_1, list_component_1, listwithprogressbar_component_1, delayService_1, profileService_1, profile_storage_1;
+    var core_1, router_deprecated_1, cards_component_1, titlewithtextarea_component_1, list_component_1, listwithprogressbar_component_1, delayService_1, profileService_1, profile_storage_1;
     var ProfilerComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (router_1_1) {
-                router_1 = router_1_1;
+            function (router_deprecated_1_1) {
+                router_deprecated_1 = router_deprecated_1_1;
             },
             function (cards_component_1_1) {
                 cards_component_1 = cards_component_1_1;
@@ -87,10 +87,10 @@ System.register(['angular2/core', 'angular2/router', './cards/cards.component', 
                 ProfilerComponent = __decorate([
                     core_1.Component({
                         templateUrl: '../app/component/profiler/profiler.html',
-                        directives: [router_1.ROUTER_DIRECTIVES, cards_component_1.CardComponent, titlewithtextarea_component_1.TitleWithTextAreaComponent, list_component_1.ListComponent, listwithprogressbar_component_1.ListWithProgressComponent],
+                        directives: [router_deprecated_1.ROUTER_DIRECTIVES, cards_component_1.CardComponent, titlewithtextarea_component_1.TitleWithTextAreaComponent, list_component_1.ListComponent, listwithprogressbar_component_1.ListWithProgressComponent],
                         providers: [delayService_1.DelayService, profileService_1.ProfileService, profile_storage_1.ProfileStorage]
                     }), 
-                    __metadata('design:paramtypes', [router_1.RouteParams, delayService_1.DelayService, profileService_1.ProfileService, router_1.Router, profile_storage_1.ProfileStorage])
+                    __metadata('design:paramtypes', [router_deprecated_1.RouteParams, delayService_1.DelayService, profileService_1.ProfileService, router_deprecated_1.Router, profile_storage_1.ProfileStorage])
                 ], ProfilerComponent);
                 return ProfilerComponent;
             }());

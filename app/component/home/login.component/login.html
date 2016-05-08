@@ -6,8 +6,9 @@
     </div>
 
     <div #btnSignInSignUpPanel class="btn-sign-in-up-panel-open">
-        <button class="submit-btn" (click)="openSignIn(btnSignInSignUpPanel, signInSignUpContiner,signInPanel)"> SIGN IN </button>
-        <button class="submit-btn" (click)="openSignUp(btnSignInSignUpPanel, signInSignUpContiner,signUpPanel)"> SIGN UP </button>
+        <!--<button class="submit-btn" (click)="openSignIn(btnSignInSignUpPanel, signInSignUpContiner,signInPanel)"> SIGN IN </button>-->
+        <div class="submit-btn" (click)="openSignUp(btnSignInSignUpPanel, signInSignUpContiner,signUpPanel, 'http://localhost:9080/auth/linkedin')"><span><i class="fa fa-linkedin" aria-hidden="true"></i> Linked In </span></div>
+        <div class="submit-btn" (click)="openSignUp(btnSignInSignUpPanel, signInSignUpContiner,signUpPanel, 'http://localhost:9080/auth/google')"><span><i class="fa fa-google" aria-hidden="true"></i> Google </span></div>
     </div>
 
 </div>

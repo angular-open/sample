@@ -1,5 +1,5 @@
-import {Component, Injectable} from 'angular2/core';
-import {Response} from 'angular2/http';
+import {Component, Injectable} from '@angular/core';
+import {Response} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {HttpServices} from '../httpServices';
 import 'rxjs/Rx';

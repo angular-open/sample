@@ -1,6 +1,6 @@
-import {Component, Input, OnInit} from 'angular2/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {NgForm} from 'angular2/common';
-import {RouteParams, ROUTER_DIRECTIVES} from 'angular2/router';
+import {RouteParams, ROUTER_DIRECTIVES} from '@angular/router-deprecated';
 import {DelayService} from '../../../service/delayService';
 
 @Component({

@@ -2,14 +2,37 @@
     <form *ngIf="active" [ngFormModel]="signUpForm" (ngSubmit)="onSubmit(signUpForm)" novalidate>
         <div>
             <div>
-                <input #username="ngForm" type="text" [ngFormControl]="signUpForm.controls['username']"  required placeholder="Username" />
-                <input #email="ngForm" type="text" [ngFormControl]="signUpForm.controls['email']" required placeholder="Email" />
+                <div class="form-group-app">
+                    <div class="normal-border" [class.error-border]="!signUpForm.controls.username.valid" [class.success-border]="signUpForm.controls.username.valid"></div>
+                    <div class="form-input">
+                        <input  #username="ngForm" type="text" [ngFormControl]="signUpForm.controls[controlsName[1]]" required placeholder="Username" />
+                    </div>
+                </div>
+                <div class="form-group-app">
+                    <div class="normal-border" [class.error-border]="!signUpForm.controls.email.valid" [class.success-border]="signUpForm.controls.email.valid"></div>
+                    <div class="form-input">
+                        <input #email="ngForm" type="text" [ngFormControl]="signUpForm.controls['email']" required placeholder="Email" />
+                    </div>
+                </div>
             </div>
             <div class="margin-t-5p">
-                <input type="password" #password="ngForm" [ngFormControl]="signUpForm.controls['password']"  required placeholder="Password" />
-                <input type="password" [class.ng-invalid]="signUpForm.hasError('mismatchedPasswords')" [class.ng-valid]="!signUpForm.hasError('mismatchedPasswords')" #conformpassword="ngForm" [ngFormControl]="signUpForm.controls['conformpassword']" required placeholder="Conform Password" />
+                <div class="form-group-app">
+                    <div class="normal-border" [class.error-border]="!signUpForm.controls.password.valid" [class.success-border]="signUpForm.controls.password.valid"></div>
+                    <div class="form-input">
+                        <input type="password" #password="ngForm" [ngFormControl]="signUpForm.controls['password']" required placeholder="Password"
+                        />
+                    </div>
+                </div>
+                <div class="form-group-app">
+                    <div class="normal-border" [class.error-border]="signUpForm.hasError('mismatchedPasswords') || !signUpForm.controls.password.valid" [class.success-border]="!signUpForm.hasError('mismatchedPasswords') && signUpForm.controls.password.valid"></div>
+                    <div class="form-input">
+                        <input type="password" #conformpassword="ngForm" [ngFormControl]="signUpForm.controls['conformpassword']" required placeholder="Conform Password"
+                        />
+                    </div>
+                </div>
             </div>
         </div>
+        {{errorMessage}}        
         <div class="margin-t-5p">
             <button type="submit" class="submit-btn">
                                 <i class="fa fa-check" aria-hidden="true"></i>

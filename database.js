@@ -6,15 +6,7 @@ var mongoUrl = "mongodb://surendarr:Ss9715261931@ds011231.mlab.com:11231/profile
 mongoose.connect(mongoUrl);
 
 var user = new Schema({
-    username: {
-        type: String,
-        index: {
-            unique: true
-        },
-        trim: true,
-        required: 'Username is required',
-    },
-    email:{
+    email: {
         type: String,
         index: {
             unique: true
@@ -23,13 +15,35 @@ var user = new Schema({
         required: 'Email address is required',
         match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address'],
     },
+    linkHeader: {
+        type: String,
+    },
+    linkedinId: {
+        type: String,
+    },
+    linkedAccessToken: {
+        type: String,
+    },
+    googleAccessToken: {
+        type: String,
+    },
+    googleId: {
+        type: String,
+    },
+    googleImage: {
+        type: String,
+    },
+    faceBookId: {
+        type: String,
+    },
+    displayName: String,
     profile: [
         {
             type: ObjectId,
             ref: 'Profiles'
         }
     ],
-    
+
 });
 
 var userDB = mongoose.model("Users", user);

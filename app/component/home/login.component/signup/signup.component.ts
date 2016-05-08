@@ -1,7 +1,7 @@
-import {Component, Input, Output, EventEmitter} from 'angular2/core';
-import { FORM_DIRECTIVES, NgControlGroup, Control, FormBuilder, ControlGroup, Validators, AbstractControl  } from 'angular2/common';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
+import { FORM_DIRECTIVES, NgControlGroup, Control, FormBuilder, ControlGroup, Validators, AbstractControl  } from '@angular/common';
 import {DelayService} from '../../../../service/delayService';
-import {RouteConfig, ROUTER_DIRECTIVES, Router, Location} from 'angular2/router';
+import {RouteConfig, ROUTER_DIRECTIVES, Router} from '@angular/router-deprecated';
 import {User} from '../../../../modal/user.modal';
 
 @Component({
@@ -25,6 +25,7 @@ export class SignUpComponent {
             {
                 username: ["", Validators.required],
                 email: ['', Validators.compose([Validators.required, this.emailValidator])],
+                
                 password: ["", Validators.required],
                 conformpassword: ["", Validators.required]
             },
@@ -34,6 +35,7 @@ export class SignUpComponent {
     }
 
     closePanel(form: any) {
+        console.log(form);
         this.controlsName.forEach(function (params: string) {
             let control = form.controls[params];
             if (control) {

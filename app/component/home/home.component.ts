@@ -1,5 +1,5 @@
-import {Component, OnInit} from 'angular2/core';
-import {RouteConfig, ROUTER_DIRECTIVES, Router, Location} from 'angular2/router';
+import {Component, OnInit} from '@angular/core';
+import {RouteConfig, ROUTER_DIRECTIVES, Router} from '@angular/router-deprecated';
 import {UrlForm}    from './modal/urlform.model';
 import {DelayService} from '../../service/delayService';
 import {ProfileService} from '../../service/profileService/profileService';

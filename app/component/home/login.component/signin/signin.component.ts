@@ -1,6 +1,6 @@
-import {Component, Input, Output, EventEmitter} from 'angular2/core';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {DelayService} from '../../../../service/delayService';
-import {RouteConfig, ROUTER_DIRECTIVES, Router, Location} from 'angular2/router';
+import {RouteConfig, ROUTER_DIRECTIVES, Router} from '@angular/router-deprecated';
 
 @Component({
     selector: 'Sign-In-View',

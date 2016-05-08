@@ -1,8 +1,7 @@
-import {bootstrap}    from 'angular2/platform/browser';
-import {provide} from 'angular2/core';
-import {ROUTER_PROVIDERS} from 'angular2/router';
-import {HTTP_PROVIDERS} from 'angular2/http';
-import {ELEMENT_PROBE_PROVIDERS} from 'angular2/platform/common_dom';
+import { bootstrap }    from '@angular/platform-browser-dynamic';
+import {provide} from '@angular/core';
+import {ROUTER_PROVIDERS} from '@angular/router-deprecated';
+import {HTTP_PROVIDERS} from '@angular/http';
 import {AppComponent} from './component/app/app.component';
 import {HttpServices} from './service/httpServices';
 
@@ -10,6 +9,6 @@ import {HttpServices} from './service/httpServices';
 bootstrap(AppComponent, [
     ROUTER_PROVIDERS,
     HTTP_PROVIDERS,
-    provide(ROUTER_PROVIDERS, { useValue: '/' }),
+    provide(ROUTER_PROVIDERS, { useValue: '/' }), 
     HttpServices,
 ]);

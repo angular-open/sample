@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from 'angular2/core';
-import {RouteParams, RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
+import {Component, Input, OnInit} from '@angular/core';
+import {RouteParams, RouteConfig, ROUTER_DIRECTIVES} from '@angular/router-deprecated';
 
 @Component({
     templateUrl: '../app/component/registration/registration.html',

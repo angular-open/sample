@@ -1,5 +1,5 @@
-import {Component, OnInit} from 'angular2/core';
-import {RouteParams, ROUTER_DIRECTIVES, Router, Location} from 'angular2/router';
+import {Component, OnInit} from '@angular/core';
+import {RouteParams, ROUTER_DIRECTIVES, Router} from '@angular/router-deprecated';
 import {CardComponent} from './cards/cards.component';
 import {TitleWithTextAreaComponent} from './titlewithtextarea/titlewithtextarea.component';
 import {ListComponent} from './list/list.component';
