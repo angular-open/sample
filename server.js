@@ -13,6 +13,8 @@ var passport = require('passport');
 var session = require('express-session');
 var LinkedInStrategy = require('passport-linkedin').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var jwt = require('jsonwebtoken');
+
 app.use(session({
     secret: 'keyboard cat'
 }));
@@ -151,7 +153,15 @@ app.get('/auth/linkedin/callback',
     passport.authenticate('linkedin', { failureRedirect: '/login' }),
     function (req, res) {
         // Successful authentication, redirect home.
-        res.redirect('/success/file?token=surendar');
+        var user = {
+            username: req.user.displayName,
+            email: req.user.email,
+        };
+        var options = {
+            expiresIn: 60
+        };
+        var token = jwt.sign(user, 'ssssss', options);
+        res.redirect('/success/file?token=' + token);
     });
 
 // GET /auth/google
@@ -173,7 +183,15 @@ app.get('/auth/google',
 app.get('/auth/google/callback',
     passport.authenticate('google', { failureRedirect: '/login' }),
     function (req, res) {
-        res.redirect('/success/file?token=surendar');
+        var user = {
+            username: req.user.displayName,
+            email: req.user.email
+        };
+        var options = {
+            expiresIn: 60
+        };
+        var token = jwt.sign(user, 'ssssss', options);
+        res.redirect('/success/file?token=' + token);
     });
 
 app.get('/user/linkedIn/detail', function (req, res) {
